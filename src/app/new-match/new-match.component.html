@@ -1,0 +1,135 @@
+<form id="add-form" (ngSubmit)="f.form.valid && saveMatch(f)" #f="ngForm" novalidate>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>Adicionar / Atualizar Partida</h2>
+      <p>Atualize ou adicione uma partida.</p>
+    </div>
+    <div class="col-sm-3">
+      <div class="form-group">
+        <label for="team_a">Equipe A</label>
+        <input type="text" [(ngModel)]="match.team_a" id="team_a" name="team_a" #team_a="ngModel" required
+          class="form-control" [ngClass]="{ 'is-invalid': f.submitted && team_a.invalid }" placeholder="Equipe A">
+        <div *ngIf="f.submitted && team_a.invalid" class="invalid-feedback">
+          <div *ngIf="team_a.errors.required">Equipe A é obrigatório!</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-1">
+      <div class="form-group">
+        <label for="result_a">Placar A</label>
+        <input type="number" [(ngModel)]="match.result_a" id="result_a" name="result_a" #result_a="ngModel" required
+          class="form-control" [ngClass]="{ 'is-invalid': f.submitted && result_a.invalid }" placeholder="0">
+        <div *ngIf="f.submitted && result_a.invalid" class="invalid-feedback">
+          <div *ngIf="result_a.errors.required">Placar A é obrigatório!</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="form-group">
+        <label for="team_b">Equipe B</label>
+        <input type="text" [(ngModel)]="match.team_b" id="team_b" name="team_b" #team_b="ngModel" required
+          class="form-control" [ngClass]="{ 'is-invalid': f.submitted && team_b.invalid }" placeholder="Equipe B">
+        <div *ngIf="f.submitted && team_b.invalid" class="invalid-feedback">
+          <div *ngIf="team_b.errors.required">Equipe B é obrigatório!</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-1">
+      <div class="form-group">
+        <label for="result_b">Placar B</label>
+        <input type="number" [(ngModel)]="match.result_b" id="result_b" name="result_b" #result_b="ngModel" required
+          class="form-control" [ngClass]="{ 'is-invalid': f.submitted && result_b.invalid }" placeholder="0">
+        <div *ngIf="f.submitted && result_b.invalid" class="invalid-feedback">
+          <div *ngIf="result_b.errors.required">Placar B é obrigatório!</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="form-group">
+        <label for="date">Data</label>
+        <input type="date" [(ngModel)]="match.date" id="date" name="date" #date="ngModel" required
+          class="form-control" [ngClass]="{ 'is-invalid': f.submitted && date.invalid }" placeholder="02/04/2021 17:00:00">
+        <div *ngIf="f.submitted && date.invalid" class="invalid-feedback">
+          <div *ngIf="date.errors.required">Data é obrigatório!</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <button type="submit" class="btn btn-success btn-add-car mr-4">Salvar</button>
+      <button type="reset" class="btn btn-secondary btn-add-car" (click)="cleanForm(f)">Cancelar</button>
+    </div>
+  </div>
+</form>
+
+<div class="row">
+  <div class="col-sm-12">
+    <hr>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <h2>Partidas</h2>
+    <p>Listagem de partidas.</p>
+    <table class="table table-borderless">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Partida</th>
+          <th>Data</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let match of matches">
+          <td>
+            <b>{{match.id}}</b>
+          </td>
+          <td>{{match.team_a}} {{match.result_a}} x {{match.result_b}} {{match.team_b}}</td>
+          <td>{{match.date}}</td>
+          <td>
+            <button type="button" class="btn btn-warning btn-sm" (click)="editMatch(match)">Editar</button>
+            <button type="button" class="btn btn-danger btn-sm ml-1" (click)="deleteMatch(match)">Deletar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-sm-12">
+    <hr>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <h2>Referências</h2>
+    <p>Conteúdos utilizados.</p>
+    <li>
+      <a href="https://www.robinwieruch.de/node-express-server-rest-api" target="_blank">
+        https://www.robinwieruch.de/node-express-server-rest-api
+      </a>
+    </li>
+    <li>
+      <a href="https://medium.com/@fernandoevangelista_28291/consumindo-api-rest-com-httpclient-no-angular-8-62c5d733ffb6" target="_blank">
+        https://medium.com/@fernandoevangelista_28291/consumindo-api-rest-com-httpclient-no-angular-8-62c5d733ffb6
+      </a>
+    </li>
+    <li>
+      <a href="https://blog.mbeck.com.br/api-rest-e-os-verbos-http-46e189085e21" target="_blank">
+        https://blog.mbeck.com.br/api-rest-e-os-verbos-http-46e189085e21
+      </a>
+    </li>
+    <li>
+      <a href="https://www.edureka.co/blog/node-js-mysql-tutorial/" target="_blank">
+        https://www.edureka.co/blog/node-js-mysql-tutorial/
+      </a>
+    </li>
+  </div>
+</div>
+
+<br><br><br>
